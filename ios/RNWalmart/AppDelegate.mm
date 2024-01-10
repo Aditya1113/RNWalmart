@@ -2,6 +2,9 @@
 
 #import <React/RCTBundleURLProvider.h>
 
+//import RN Splash Screen
+#import "RNSplashScreen.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -11,6 +14,8 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
+  //set the splash screen to show by default
+  [RNSplashScreen show];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
