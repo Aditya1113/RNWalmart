@@ -8,12 +8,23 @@ import {
   StyleSheet,
   Button
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+
+import show from '../assests/show.png'
+import hide from '../assests/hide.png'
 
 import instagram from '../assests/instagram.png';
 
 
 export default function Login({navigation}) {
+
+    const [hidePassword,setHidePassword] = useState(true)
+
+
+    const changePasswordVisibility=()=>{
+        setHidePassword(!hidePassword) 
+    }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoView}>
@@ -32,9 +43,21 @@ export default function Login({navigation}) {
           placeholder="password"
           style={styles.inputText}
           placeholderTextColor="black"
-          secureTextEntry={true}
+          secureTextEntry={hidePassword}
           // onChangeText={}
         />
+        <TouchableOpacity
+        onPress={changePasswordVisibility}
+        style={styles.visibilityBtn}
+        >
+            <Image
+            source={
+                    hidePassword
+                    ?show
+                    :hide}
+            style={styles.btnImage}
+            />
+        </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>
@@ -112,4 +135,17 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
+
+  visibilityBtn:{
+    position:'absolute',
+    right:12,
+    height:25,
+    width:25,
+    padding:0,
+    marginTop:21
+  },
+  btnImage:{
+    height:25,
+    width:25
+  }
 });
