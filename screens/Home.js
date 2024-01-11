@@ -6,9 +6,9 @@ const Home = ({navigation}) => {
     <View style={styles.container}>
       <Text>Home</Text>
       <Button
-      title="go to about"
+      title="Login Page"
       color='blue'
-      onPress={()=>navigation.navigate('About')}
+      onPress={()=>navigation.navigate('Login')}
       />
     </View>
   )

@@ -6,12 +6,14 @@ import {
   SafeAreaView,
   Image,
   StyleSheet,
+  Button
 } from 'react-native';
 import React from 'react';
 
 import instagram from '../assests/instagram.png';
 
-export default function Login() {
+
+export default function Login({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoView}>
@@ -45,6 +47,11 @@ export default function Login() {
           <Text style={styles.signUp}>Signup</Text>
         </TouchableOpacity>
       </View>
+
+      <Button
+      title="Go back"
+      onPress={()=>navigation.goBack()}
+      />
     </SafeAreaView>
   );
 }
