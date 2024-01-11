@@ -47,6 +47,7 @@ export default function Login({navigation}) {
           // onChangeText={}
         />
         <TouchableOpacity
+        activeOpacity={0.8}
         onPress={changePasswordVisibility}
         style={styles.visibilityBtn}
         >
@@ -139,8 +140,6 @@ const styles = StyleSheet.create({
   visibilityBtn:{
     position:'absolute',
     right:12,
-    height:25,
-    width:25,
     padding:0,
     marginTop:21
   },
