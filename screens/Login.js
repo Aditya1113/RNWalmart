@@ -19,7 +19,10 @@ import instagram from '../assests/instagram.png';
 export default function Login({navigation}) {
 
     const [hidePassword,setHidePassword] = useState(true)
-
+    const [loginDetails,setLoginDetails] = useState({
+        email:'',
+        password:''
+    })
 
     const changePasswordVisibility=()=>{
         setHidePassword(!hidePassword) 
@@ -35,7 +38,7 @@ export default function Login({navigation}) {
           placeholder="email"
           placeholderTextColor="black"
           style={styles.inputText}
-          // onChangeText={}
+          onChangeText={(val)=>setLoginDetails({...loginDetails,email:val})}
         />
       </View>
       <View style={styles.inputView}>
@@ -44,7 +47,7 @@ export default function Login({navigation}) {
           style={styles.inputText}
           placeholderTextColor="black"
           secureTextEntry={hidePassword}
-          // onChangeText={}
+          onChangeText={(val)=>setLoginDetails({...loginDetails,password:val})}
         />
         <TouchableOpacity
         activeOpacity={0.8}
@@ -60,7 +63,7 @@ export default function Login({navigation}) {
             />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.loginBtn}>
+      <TouchableOpacity style={styles.loginBtn} onPress={()=>console.log(loginDetails)}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <View style={styles.actions}>
