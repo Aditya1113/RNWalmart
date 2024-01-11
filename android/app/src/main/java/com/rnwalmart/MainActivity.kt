@@ -8,9 +8,5 @@ class MainActivity : ReactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         SplashScreen.show(this)
         super.onCreate(savedInstanceState)
-
-
     }
-
-    // ... (other methods if needed)
 }

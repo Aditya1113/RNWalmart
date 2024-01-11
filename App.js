@@ -1,72 +1,38 @@
-import {Text, SafeAreaView, StyleSheet, Button,TouchableOpacity,TouchableNativeFeedback,Platform} from 'react-native';
-import React, {useState} from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Button, TextInput } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-
+import Home from './screens/Home';
+import SplashScreen from 'react-native-splash-screen';
+import About from './screens/About';
+import Login from './screens/Login';
 
 
 export default function App() {
-  const [count, setCount] = useState(0);
 
-  const clickHandler = () => {
-    setCount(count + 1);
-  };
+useEffect(()=>{
+  SplashScreen.hide()
+})
 
-  const TouchableComponent = 
-  Platform.OS ==='android'?TouchableNativeFeedback:TouchableOpacity
+  const Stack = createNativeStackNavigator()
 
-
-  return (
-    <SafeAreaView>
-      <Text style={styles.text}>{count}</Text>
-      <Button title="Update" color="red" onPress={clickHandler}/>
-
-      <TouchableComponent onPress={clickHandler} 
-        background = {Platform.OS === 'android'?TouchableNativeFeedback.Ripple('#3498db',false):undefined}
-        // background = {TouchableComponent===TouchableNativeFeedback?TouchableNativeFeedback.Ripple('#3498db',false):undefined}
-      >
-        <Text style={styles.buttonText}>Press Me</Text>
-      </TouchableComponent>
-
-    </SafeAreaView>
-  );
+ return (
+  
+     <NavigationContainer>
+         <Stack.Navigator initialRouteName='Login'>
+             <Stack.Screen  name="Home" component={Home} />
+             <Stack.Screen  name="About" component={About} />
+             <Stack.Screen  name="Login" component={Login} />
+         </Stack.Navigator>
+     </NavigationContainer>
+  
+ 
+ )
 }
 
+
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 40,
-    color: 'coral',
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  grayText: {
-    color: 'grey',
-  },
 
-  text1: {
-    flex: 2,
-    fontSize: 34,
-    color: 'red',
-    textAlign: 'center',
-    marginTop: 10,
-  },
 
-  text2: {
-    flex: 1,
-  },
-  container: {
-    flexDirection: 'row',
-  },
-  buttonText:{
-    color:'#3498db',
-    textAlign:'center',
-    fontSize:16,
-    fontWeight:'bold'
-  },
-  button:{
-    borderWidth:1,
-    borderColor:'#3498db',
-    padding: 10,
-    borderRadius:5,
-    alignItems:'center'
-  }
 });
