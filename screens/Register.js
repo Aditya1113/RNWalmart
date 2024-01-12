@@ -1,6 +1,8 @@
 import { View, Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import axios from '../node_modules/axios/index'
+import React, { useRef, useState } from 'react'
+import axios from 'axios'
+import Toast from 'react-native-simple-toast';
+
 
 export default function Register({navigation}) {
 const [details,setDetails] = useState({
@@ -8,12 +10,24 @@ const [details,setDetails] = useState({
     Mobile:'',
     Email:'',
     Password:''
-}) 
+})
+
+// const setEmail=(val)=>{
+//     emailRef.current.value = val
+// }
+
+// const register=()=>{
+//     console.log(details)
+// }
+
+// const emailRef = useRef()
+
+
 
 const register=()=>{
     axios.post('https://users-api-9uui.onrender.com/register',details)
     .then((res)=>{
-        console.log(res.data.message)
+        Toast.show(res.data.message,Toast.LONG);
         navigation.navigate('Login')
     })
     .catch(err=>console.log(err))
@@ -24,11 +38,13 @@ const register=()=>{
     
     <View style={styles.inputView}>
       <TextInput
+
         placeholder="email"
         placeholderTextColor="black"
         style={styles.inputText}
         autoCapitalize='none'
-        onChangeText={(val)=>setDetails({...details,Email:val})}
+        ref={emailRef}
+        onChangeText={(val)=>setDetails({...details,email:val})}
       />
     </View>
     <View style={styles.inputView}>
@@ -70,8 +86,6 @@ const register=()=>{
         <Text style={styles.signUp}>Login</Text>
       </TouchableOpacity>
     </View>
-
-   
   </SafeAreaView>
   )
 }

@@ -14,7 +14,9 @@ import show from '../assests/show.png'
 import hide from '../assests/hide.png'
 
 import instagram from '../assests/instagram.png';
-import axios from '../node_modules/axios/index';
+import axios from 'axios';
+
+import Toast from 'react-native-simple-toast';
 
 
 export default function Login({navigation}) {
@@ -31,7 +33,11 @@ export default function Login({navigation}) {
 const login =()=>{
   axios.post('https://users-api-9uui.onrender.com/login',loginDetails) 
   .then((res)=>{
-      if(res.status===201) navigation.navigate('Home')
+      if(res.status===201) {
+      Toast.show(res.data.message,Toast.LONG)  
+        navigation.navigate('Home')
+      
+      }
       else{
         console.log('there is some error')
       }
