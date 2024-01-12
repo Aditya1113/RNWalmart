@@ -14,21 +14,29 @@ import show from '../assests/show.png'
 import hide from '../assests/hide.png'
 
 import instagram from '../assests/instagram.png';
+import axios from '../node_modules/axios/index';
 
 
 export default function Login({navigation}) {
 
     const [hidePassword,setHidePassword] = useState(true)
     const [loginDetails,setLoginDetails] = useState({
-        email:'',
-        password:''
+      Email:'',
+      Password:''
     })
 
     const changePasswordVisibility=()=>{
         setHidePassword(!hidePassword) 
     }
 const login =()=>{
-  
+  axios.post('https://users-api-9uui.onrender.com/login',loginDetails) 
+  .then((res)=>{
+      if(res.status===201) navigation.navigate('Home')
+      else{
+        console.log('there is some error')
+      }
+  })
+  .catch(err=>console.log(err))
 }
   return (
     <SafeAreaView style={styles.container}>
@@ -40,7 +48,8 @@ const login =()=>{
           placeholder="email"
           placeholderTextColor="black"
           style={styles.inputText}
-          onChangeText={(val)=>setLoginDetails({...loginDetails,email:val})}
+          onChangeText={(val)=>setLoginDetails({...loginDetails,Email:val})}
+          autoCapitalize='none'
         />
       </View>
       <View style={styles.inputView}>
@@ -49,7 +58,8 @@ const login =()=>{
           style={styles.inputText}
           placeholderTextColor="black"
           secureTextEntry={hidePassword}
-          onChangeText={(val)=>setLoginDetails({...loginDetails,password:val})}
+          autoCapitalize='none'
+          onChangeText={(val)=>setLoginDetails({...loginDetails,Password:val})}
         />
         <TouchableOpacity
         activeOpacity={0.8}

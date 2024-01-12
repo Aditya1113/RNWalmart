@@ -1,5 +1,6 @@
 import { View, Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
+import axios from '../node_modules/axios/index'
 
 export default function Register({navigation}) {
 const [details,setDetails] = useState({
@@ -10,7 +11,12 @@ const [details,setDetails] = useState({
 }) 
 
 const register=()=>{
-
+    axios.post('https://users-api-9uui.onrender.com/register',details)
+    .then((res)=>{
+        console.log(res.data.message)
+        navigation.navigate('Login')
+    })
+    .catch(err=>console.log(err))
 }
 
   return (
@@ -21,6 +27,7 @@ const register=()=>{
         placeholder="email"
         placeholderTextColor="black"
         style={styles.inputText}
+        autoCapitalize='none'
         onChangeText={(val)=>setDetails({...details,Email:val})}
       />
     </View>
@@ -29,6 +36,7 @@ const register=()=>{
         placeholder="password"
         style={styles.inputText}
         placeholderTextColor="black"
+        autoCapitalize='none'
         onChangeText={(val)=>setDetails({...details,Password:val})}
       />
     </View>
@@ -37,7 +45,8 @@ const register=()=>{
         placeholder="Name"
         placeholderTextColor="black"
         style={styles.inputText}
-        onChangeText={(val)=>setLoginDetails({...details,email:val})}
+        autoCapitalize='none'
+        onChangeText={(val)=>setDetails({...details,Name:val})}
       />
     </View>
 
@@ -46,7 +55,8 @@ const register=()=>{
         placeholder="Mobile"
         placeholderTextColor="black"
         style={styles.inputText}
-        onChangeText={(val)=>setLoginDetails({...details,email:val})}
+        autoCapitalize='none'
+        onChangeText={(val)=>setDetails({...details,Mobile:val})}
       />
     </View>
     <TouchableOpacity style={styles.loginBtn} onPress={register}>
