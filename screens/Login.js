@@ -8,7 +8,15 @@ import {
   StyleSheet,
   Button
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import auth from '@react-native-firebase/auth';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+
 
 import show from '../assests/show.png'
 import hide from '../assests/hide.png'
@@ -30,6 +38,33 @@ export default function Login({navigation}) {
     const changePasswordVisibility=()=>{
         setHidePassword(!hidePassword) 
     }
+
+
+    useEffect(()=>{
+      GoogleSignin.configure({
+        webClientId: '659449851446-jedr79au3ackgfqo0rhg1793m40j521n.apps.googleusercontent.com'
+      });
+    })
+
+
+    const googleSignIn= async ()=> {
+      // Check if your device supports Google Play
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      // Get the users ID token
+      const { idToken } = await GoogleSignin.signIn();
+    
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    
+      // Sign-in the user with the credential
+      const user_sign_in = auth().signInWithCredential(googleCredential);
+
+      user_sign_in.then(res=>{
+        console.log(res);
+        navigation.navigate('Home')
+      })
+    }
+
 const login =()=>{
   axios.post('https://users-api-9uui.onrender.com/login',loginDetails) 
   .then((res)=>{
@@ -93,6 +128,11 @@ const login =()=>{
         </TouchableOpacity>
       </View>
 
+      <GoogleSigninButton
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={googleSignIn}
+      />
       <Button
       title="Go back"
       onPress={()=>navigation.goBack()}
