@@ -70,7 +70,7 @@ const login =()=>{
   .then((res)=>{
       if(res.status===201) {
       Toast.show(res.data.message,Toast.LONG)  
-        navigation.navigate('Home')
+        navigation.navigate('Users')
       
       }
       else{

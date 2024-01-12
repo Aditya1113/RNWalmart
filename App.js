@@ -8,6 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import About from './screens/About';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import Users from './screens/Users';
 
 
 export default function App() {
@@ -26,6 +27,7 @@ useEffect(()=>{
              <Stack.Screen  name="About" component={About} />
              <Stack.Screen  name="Login" component={Login} />
              <Stack.Screen  name="Register" component={Register} />
+             <Stack.Screen  name="Users" component={Users} />
          </Stack.Navigator>
      </NavigationContainer>
   
