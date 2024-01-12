@@ -27,7 +27,9 @@ export default function Login({navigation}) {
     const changePasswordVisibility=()=>{
         setHidePassword(!hidePassword) 
     }
-
+const login =()=>{
+  
+}
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoView}>
@@ -63,14 +65,14 @@ export default function Login({navigation}) {
             />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={()=>console.log(loginDetails)}>
+      <TouchableOpacity style={styles.loginBtn} onPress={login}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <View style={styles.actions}>
         <TouchableOpacity style={{marginHorizontal: 15}}>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.navigate('Register')}>
           <Text style={styles.signUp}>Signup</Text>
         </TouchableOpacity>
       </View>
